@@ -42,7 +42,7 @@ module.exports = {
 
             if (!player.playing && !player.paused) return player.play();
 
-        } else if (loadType === 'SEARCH_RESULT' || loadType === 'TRACKS') {
+        } else if (loadType === 'SEARCH_RESULT' || loadType === 'TRACK_LOADED') {
             const track = tracks.shift();
             track.info.requester = interaction.member;
 
