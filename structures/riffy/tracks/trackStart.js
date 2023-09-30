@@ -62,6 +62,7 @@ client.riffy.on('trackStart', async (player, track) => {
         .setName(track.info.title)
         .setAuthor(track.info.author)
         .setColor("auto")
+        .setTheme("dynamic")
         .setBrightness(100)
         .setThumbnail(track.info.thumbnail)
         .setProgress(0)
