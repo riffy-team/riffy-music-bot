@@ -1,7 +1,7 @@
 {
   "name": "riffy-music-bot",
   "description": "A pro music bot for discord using riffy and musicard.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,13 +9,13 @@
   },
   "dependencies": {
     "ascii-table": "^0.0.9",
-    "discord.js": "^14.12.1",
+    "discord.js": "^14.14.1",
     "ms": "^2.1.3",
-    "musicard": "^1.5.1",
-    "riffy": "^1.0.2"
+    "musicard": "^2.0.2",
+    "riffy": "^1.0.3"
   },
   "keywords": [],
   "type": "commonjs",
   "author": "FlameFace",
-  "license": "ISC"
+  "license": "MIT"
 }

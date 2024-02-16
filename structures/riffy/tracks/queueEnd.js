@@ -1,5 +1,12 @@
 const client = require("../../Client")
 
-client.riffy.on('queueEnd', async (player, track) => {
-    return player.autoplay(player)
+client.riffy.on("queueEnd", async (player) => {
+    const channel = client.channels.cache.get(player.textChannel);
+
+    if (player.isAutoplay) {
+        player.autoplay(player)
+    } else {
+        player.destroy();
+        channel.send("Queue has ended.");
+    }
 })

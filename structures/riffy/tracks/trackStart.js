@@ -1,5 +1,5 @@
-const { AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-const { musicCard } = require("musicard");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { MiniPro } = require("musicard");
 const client = require("../../Client")
 
 client.riffy.on('trackStart', async (player, track) => {
@@ -58,22 +58,22 @@ client.riffy.on('trackStart', async (player, track) => {
                 .setDisabled(true)
         );
 
-    const card = new musicCard()
-        .setName(track.info.title)
-        .setAuthor(track.info.author)
-        .setColor("auto")
-        .setTheme("dynamic")
-        .setBrightness(100)
-        .setThumbnail(track.info.thumbnail)
-        .setProgress(0)
-        .setStartTime("0:00")
-        .setEndTime(formattedLength)
-
-    const buffer = await card.build();
-    const attachment = new AttachmentBuilder(buffer, { name: `musicard.png` });
+    const musicard = await MiniPro({
+        thumbnailImage: track.info.thumbnail,
+        backgroundColor: "#070707",
+        progress: 10,
+        progressColor: "#FF7A00",
+        progressBarColor: "#5F2D00",
+        name: track.info.title,
+        nameColor: "#FF7A00",
+        author: track.info.author,
+        authorColor: "#696969"
+    });
 
     const msg = await channel.send({
-        files: [attachment],
+        files: [{
+            attachment: musicard
+        }],
         components: [row]
     });
 
