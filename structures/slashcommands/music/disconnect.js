@@ -8,6 +8,6 @@ module.exports = {
         const player = client.riffy.players.get(interaction.guildId);
         player.destroy();
 
-        return interaction.reply(`:stop_button: Disconnected from the voice channel.`);
+        return interaction.reply(`Disconnected from the voice channel.`);
     },
 };

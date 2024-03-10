@@ -12,6 +12,7 @@ module.exports = {
             required: true,
         }
     ],
+
     /**
      * 
      * @param {Client} client 
@@ -19,6 +20,7 @@ module.exports = {
      * @param {String[]} args
      * @returns 
      */
+
     run: async (client, interaction, args) => {
         const query = interaction.options.getString('query');
 
@@ -32,7 +34,7 @@ module.exports = {
         const resolve = await client.riffy.resolve({ query: query, requester: interaction.member });
         const { loadType, tracks, playlistInfo } = resolve;
 
-        if (loadType === 'PLAYLIST_LOADED') {
+        if (loadType === 'playlist') {
             for (const track of resolve.tracks) {
                 track.info.requester = interaction.member;
                 player.queue.add(track);
@@ -42,7 +44,7 @@ module.exports = {
 
             if (!player.playing && !player.paused) return player.play();
 
-        } else if (loadType === 'SEARCH_RESULT' || loadType === 'TRACK_LOADED') {
+        } else if (loadType === 'search' || loadType === 'track') {
             const track = tracks.shift();
             track.info.requester = interaction.member;
 

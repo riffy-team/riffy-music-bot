@@ -1,149 +1,126 @@
-# ___Pro Handler Template (Riffy Music Bot)___
-I made this **handler** template keeping in mind that you know the basics of js and djs, so I won't be explaining the basics of js and djs in this readme.
+<img src="https://ik.imagekit.io/unburn/discord-pro-handler.svg" />
 
-## ___Features___
-- Shard support with shard stats commands
-- Easy to interact
-- Reload commands, slash commands, events, and more without restarting the bot
-- Developer commands
-- Database support (using mongoose)
-- Prefix + Slash commands support
-- Error handling & Permission handling
-- Customizable
-- Music commands (using riffy)
+<p align="center">Most advanced handler for discord bot with shard and database support built using discord.js</p>
 
-## ___Requirements___
-- Node.js v16 or higher
-- Built using discord.js v14
-- MongoDB database (optional)
+<p>
 
-## ___Installation___
-#### ___1. Clone the repository___
-```bash
-git clone https://github.com/flam3face/advanced-handler.git
+<p align="center">
+    <a href="https://github.com/flameface/discord-pro-handler/"><b>Github</b></a> •
+    <a href="https://discord.gg/66uGX7t4ww"><b>Support</b></a>
+</p>
+
+<div align="center">
+
+![NPM Version](https://img.shields.io/npm/v/discord.js?label=discord.js&style=flat-square&color=%23FEB700)
+![GitHub Repo stars](https://img.shields.io/github/stars/flameface/discord-pro-handler?style=flat-square&color=%23FEB700)
+![GitHub forks](https://img.shields.io/github/forks/flameface/discord-pro-handler?style=flat-square&color=%23FEB700)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/flameface/discord-pro-handler?style=flat-square&color=%23FEB700)
+
+</div>
+
+# Discord Pro Handler
+Experience the ultimate handler, equipped with basic to advanced features, stunning logging capabilities, a simple yet robust structure, shard support, and much more. Save valuable time by utilizing this comprehensive solution, designed to streamline the process of building bots effortlessly.
+
+## Changelog
+**UPDATE 2.0.0**
+- New logging interface
+- Added basic example commands
+
+## Features
+- Shard support with shard commands.
+- Reload commands, slash commands & events without restarting the bot.
+- Prefix + slash command support.
+- Permission and error handlers.
+
+## Installation
+**1. Clone the repository**
+```
+git clone https://github.com/flameface/discord-pro-handler.git
 ```
 
-#### ___2. Install the dependencies___
-```bash
+**2. Install the required dependencies**
+```
 npm install
 ```
 
-#### ___3. Configure the bot___
+**3. Config the bot**
 In [config](./structures/configuration/index.js) file, fill in the required fields.
 
-#### ___4. Run the bot___
-```bash
-npm start
-```
-
-## ___Shard___
-If you want to use shards, then make shard true in [config](./structures/configuration/index.js) file.
-
+**4. Run the bot**
 ```js
-shard: true
+npm start
+
+//OR
+
+node index.js
+
+//OR
+
+node .
 ```
 
-**Note**: Your bot should be in more than 2500 servers to use shards. 
+## Configs
 
-## ___Database (optional)___
-If you want to use database, then make database true in [config](./structures/configuration/index.js) file.
+#### Shard
+If you want to use shards, then make sharding value true in [config](./structures/configuration/index.js) file.
+```js
+sharding: true
+```
 
+**Note**: Your bot should be in more than 2500 servers to use shards.
+
+#### Database
+If you want to use database, then make database value true in [config](./structures/configuration/index.js) file.
 ```js
 database: true
 ```
 
-**Note**: You need to have a [MongoDB](https://www.mongodb.com/products/platform/cloud) database to use the database and you need to put mongodb url in [config](./structures/configuration/index.js) file.
+## Command Config
 
-## ___Lavalink___
-If you want to use lavalink, then put your lavalink host in [config](./structures/configuration/index.js) file.
-
-```js
-nodes: [
-        {
-            host: "localhost",
-            port: 2333,
-            password: "youshallnotpass",
-            secure: false
-        }
-    ]
-```
-
-## ___Command Config___
-#### ___1. Permissions___
+#### Permissions
 You can set the permissions for the command by adding **clientPermissions** and **userPermissions** in the command file.
-
 ```js
 module.exports = {
     name: "ping",
     description: "Get the bot's ping",
-    clientPermissions: ["SendMessages"], // Permissions that the bot needs to run the command
-    userPermissions: ["SendMessages"], // Permissions that the user needs to run the command
+    clientPermissions: ["SendMessages"],
+    userPermissions: ["SendMessages"],
     run: async (client, message, args) => {
-        message.channel.send(`Pong! ${client.ws.ping}ms`);
+        message.channel.send(`${client.ws.ping}ms`);
     }
 }
 ```
 
-#### ___2. Developer Only___
+#### Developer Only
 You can make the command developer only by adding **developerOnly** in the command file.
-
 ```js
 module.exports = {
     name: "ping",
     description: "Get the bot's ping",
-    developerOnly: true, // If this is true, then only the bot developers can run this command
+    developerOnly: true,
     run: async (client, message, args) => {
         message.channel.send(`Pong! ${client.ws.ping}ms`);
     }
 }
 ```
 
-#### ___3. Guild Only___
+#### Guild Only
 You can make the command guild only by adding **guildOnly** in the command file.
-
 ```js
 module.exports = {
     name: "ping",
     description: "Get the bot's ping",
-    guildOnly: true, // If this is true, then the command can only be used in guilds
+    guildOnly: true,
     run: async (client, message, args) => {
         message.channel.send(`Pong! ${client.ws.ping}ms`);
     }
 }
 ```
 
-## ___Controls___
+## Additional
+We added a feature that will reload commands, slash commands, and events without restarting your bot, for example:
 
-#### ___1. Reload___
-You can reload commands & slash commands without restarting the bot.
+![alt text](./assets/example1.png)
 
-```js
-const { ApplicationCommandOptionType } = require("discord.js");
-const { reloadCommands } = require("../../functions/control");
-
-module.exports = {
-    name: "reloadcommand",
-    description: "Reloads a command",
-    options: [
-        {
-            name: "command",
-            description: "The command to reload",
-            type: ApplicationCommandOptionType.String,
-            required: true
-        }
-    ],
-
-    run: async (client, interaction, args) => {
-        const command = interaction.options.getString("command");
-        const output = await reloadCommands(command);
-
-        interaction.reply(output);
-    }
-}
-```
-
-## ___Contact___
-If you have any questions or suggestions, then you can join our [support server](https://discord.gg/TvjrWtEuyP) and ask there.
-
-## ___License___
-This project is licensed under the [MIT License](./LICENSE).
+## Support
+That's all flamies, if you have any issue or problem, feel free to ask in our [community](https://discord.gg/bk6mz3hwXg).

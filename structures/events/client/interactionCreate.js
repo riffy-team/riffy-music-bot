@@ -1,6 +1,8 @@
 const { PermissionsBitField } = require("discord.js");
-const client = require("../../Client");
-const { developers } = require("../../configuration/index")
+const client = require("../../client");
+const { developers } = require("../../configuration/index");
+const { logger } = require("../../functions/logger");
+
 
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
@@ -57,7 +59,7 @@ client.on("interactionCreate", async (interaction) => {
         if (command.inVoice && !memberChannel) {
             if (!memberChannel) {
                 return interaction.reply({
-                    content: `:x: You must be in a voice channel to use this command.`,
+                    content: `You must be in a voice channel to use this command.`,
                     ephemeral: true,
                 });
             }
@@ -65,32 +67,32 @@ client.on("interactionCreate", async (interaction) => {
 
         if (command.sameVoice && memberChannel !== clientChannel) {
             return interaction.reply({
-                content: `:x: You must be in the same voice channel as me to use this command.`,
+                content: `You must be in the same voice channel as me to use this command.`,
                 ephemeral: true,
             });
         }
 
         if (command.player && !player) {
             return interaction.reply({
-                content: `:x: No music is currently playing.`,
+                content: `No music is currently playing.`,
                 ephemeral: true,
             });
         }
 
         if (command.current && !player.current) {
             return interaction.reply({
-                content: `:x: I am not playing anything right now.`,
+                content: `I am not playing anything right now.`,
                 ephemeral: true,
             });
         }
 
         await command.run(client, interaction, interaction.options);
     } catch (err) {
-        console.log("\n🟥 An error occurred while processing a slash command:");
+        logger("An error occurred while processing a slash command:", "error")
         console.log(err);
 
         return interaction.reply({
-            content: `:x: An error has occurred while processing a slash command: ${err}`,
+            content: `An error has occurred while processing a slash command: ${err}`,
             ephemeral: true,
         });
     }

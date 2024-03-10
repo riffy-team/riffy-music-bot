@@ -1,4 +1,4 @@
-const client = require("../../Client");
+const client = require("../../client");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 client.on('interactionCreate', async (interaction) => {

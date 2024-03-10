@@ -1,8 +1,21 @@
 const { ActivityType } = require("discord.js");
-const client = require("../../Client");
+const client = require("../../client");
+const { logger } = require("../../functions/logger");
 
 client.on("ready", async () => {
-    console.log(`\n🟩 ${client.user.tag} is online!`);
+    client.riffy.init(client.user.id);
 
-    client.riffy.init(client.user.id); // Initialize Riffy
+    console.log("\n---------------------")
+    logger(`${client.user.tag} is ready`, "success")
+    console.log("---------------------")
+
+    client.user.setPresence({
+        activities: [
+            {
+                name: "You",
+                type: ActivityType.Watching
+            }
+        ],
+        status: "online"
+    })
 })

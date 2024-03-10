@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-const { MiniPro } = require("musicard");
-const client = require("../../Client")
+const { Dynamic } = require("musicard");
+const client = require("../../client")
 
 client.riffy.on('trackStart', async (player, track) => {
     const row = new ActionRowBuilder()
@@ -58,16 +58,10 @@ client.riffy.on('trackStart', async (player, track) => {
                 .setDisabled(true)
         );
 
-    const musicard = await MiniPro({
+    const musicard = await Dynamic({
         thumbnailImage: track.info.thumbnail,
-        backgroundColor: "#070707",
-        progress: 10,
-        progressColor: "#FF7A00",
-        progressBarColor: "#5F2D00",
         name: track.info.title,
-        nameColor: "#FF7A00",
-        author: track.info.author,
-        authorColor: "#696969"
+        author: track.info.author
     });
 
     const msg = await channel.send({

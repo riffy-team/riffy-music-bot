@@ -8,6 +8,6 @@ module.exports = {
         const player = client.riffy.players.get(interaction.guild.id);
         player.stop();
 
-        return interaction.reply(`:fast_forward: Skipped the current track.`);
+        return interaction.reply(`Skipped the current track.`);
     },
 };
