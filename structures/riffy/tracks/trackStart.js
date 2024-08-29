@@ -64,16 +64,9 @@ client.riffy.on('trackStart', async (player, track) => {
         author: track.info.author
     });
 
-    const msg = await channel.send({
-        files: [{
-            attachment: musicard
-        }],
-        components: [row]
-    });
-
-    setTimeout(async () => {
-        return await msg.edit({
-            components: [rowDisabled]
-        });
-    }, totalMilliseconds);
-})
+    const msg = await channel
+    .send({
+        files: [{attachment: musicard}],
+        components: [row]})
+    .then((x) => (player.message = x));
+});
