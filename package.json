@@ -1,20 +1,22 @@
 {
   "name": "riffy-music-bot",
-  "description": "A pro music bot for discord using riffy and musicard.",
-  "version": "1.0.4",
+  "description": "An upgraded pro music bot for discord using riffy and musicard with autocomplete, lyrics, and filters.",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "ascii-table": "^0.0.9",
     "colors": "^1.4.0",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.25.1",
+    "lyrics-finder": "^21.7.0",
     "moment": "^2.30.1",
     "ms": "^2.1.3",
-    "musicard": "latest",
-    "riffy": "latest"
+    "musicard": "^3.0.1",
+    "riffy": "^1.0.9"
   },
   "keywords": [
     "riffy",
@@ -24,5 +26,8 @@
     "discord-pro-handler"
   ],
   "author": "FlameFace",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }

@@ -22,8 +22,12 @@
 
 ## Features
 - All basic music commands
-- With [Musicard](https://github.com/unburn/musicard) integrated.
-- Using [Discord Pro Handler](https://github.com/flameface/discord-pro-handler)
+- **Autocomplete Search Support** (Fast & easy music searching)
+- **Now Playing Card** (Powered by Musicard Bloom)
+- **Loop, Volume, and Queue Management**
+- Integrated with [Musicard](https://github.com/unburn/musicard) for beautiful song cards.
+- Using [Discord Pro Handler](https://github.com/flameface/discord-pro-handler) logic.
+- Robust error handling and sharding support.
 
 ## Installation
 **1. Clone the repository**

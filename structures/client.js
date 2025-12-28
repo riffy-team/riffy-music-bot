@@ -2,7 +2,10 @@ const { readdirSync } = require("fs");
 const { REST, Routes, Client, Collection } = require('discord.js');
 const { client_id, client_token, nodes } = require("./configuration/index");
 const { logger } = require("./functions/logger");
-const { Riffy } = require("riffy")
+const { Riffy } = require("riffy");
+const { initializeFonts } = require("musicard");
+
+initializeFonts();
 
 const client = new Client({
     intents: [

@@ -1,5 +1,5 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-const { Dynamic } = require("musicard");
+const { Bloom } = require("musicard");
 const client = require("../../client")
 
 client.riffy.on('trackStart', async (player, track) => {
@@ -31,42 +31,24 @@ client.riffy.on('trackStart', async (player, track) => {
 
     const musicLength = track.info.length;
     const formattedLength = formatTime(Math.round(musicLength / 1000));
-    const [minutesStr, secondsStr] = formattedLength.split(":");
-    const minutes = parseInt(minutesStr, 10);
-    const seconds = parseInt(secondsStr, 10);
-    const totalMilliseconds = (minutes * 60 + seconds) * 1000;
 
-    //disabling buttons when the song ends
-    const rowDisabled = new ActionRowBuilder()
-        .addComponents(
-            new ButtonBuilder()
-                .setCustomId('disconnect')
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji('⏺')
-                .setDisabled(true),
-
-            new ButtonBuilder()
-                .setCustomId('pause')
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji('⏸')
-                .setDisabled(true),
-
-            new ButtonBuilder()
-                .setCustomId('skip')
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji('⏭')
-                .setDisabled(true)
-        );
-
-    const musicard = await Dynamic({
-        thumbnailImage: track.info.thumbnail,
-        name: track.info.title,
-        author: track.info.author
+    const musicard = await Bloom({
+        trackName: track.info.title,
+        artistName: track.info.author,
+        albumArt: track.info.thumbnail,
+        isExplicit: false,
+        timeAdjust: {
+            timeStart: "0:00",
+            timeEnd: formattedLength,
+        },
+        progressBar: 0,
+        volumeBar: player.volume,
     });
 
     const msg = await channel
-    .send({
-        files: [{attachment: musicard}],
-        components: [row]})
-    .then((x) => (player.message = x));
+        .send({
+            files: [{ attachment: musicard, name: "musicard.png" }],
+            components: [row]
+        })
+        .then((x) => (player.message = x));
 });

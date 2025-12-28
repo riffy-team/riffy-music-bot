@@ -3,7 +3,7 @@ module.exports = {
     client_id: "",
     client_prefix: "!",
     mongodb_url: "", //optional
-    developers: ["786504767358238720"],
+    developers: ["1203605618745933880"],
     sharding: false,
     database: false,
     nodes: [

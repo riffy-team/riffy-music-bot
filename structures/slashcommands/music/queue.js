@@ -11,27 +11,37 @@ module.exports = {
     run: (client, interaction) => {
         const player = client.riffy.players.get(interaction.guild.id);
 
-        const queue = player.queue.length > 9 ? player.queue.slice(0, 9) : player.queue;
+        const queue = player.queue.length > 10 ? player.queue.slice(0, 10) : player.queue;
+
+        const totalDuration = player.queue.reduce((acc, curr) => acc + curr.info.length, 0);
 
         const embed = new EmbedBuilder()
-            .setColor('#2f3136')
-            .setTitle('Now Playing')
+            .setColor('#5865F2')
+            .setTitle('🎶 Current Queue')
             .setThumbnail(player.current.info.thumbnail)
-            .setDescription(`[${player.current.info.title}](${player.current.info.uri}) [${ms(player.current.info.length)}]`)
-            .setFooter({ text: `Queue length: ${player.queue.length} tracks` });
+            .addFields([
+                {
+                    name: 'Now Playing',
+                    value: `[${player.current.info.title}](${player.current.info.uri}) - \`${ms(player.current.info.length)}\``,
+                }
+            ])
+            .setFooter({ text: `Tracks in queue: ${player.queue.length} | Total Duration: ${ms(totalDuration)}` });
 
-        if (queue.length)
+        if (queue.length) {
             embed.addFields([
                 {
                     name: 'Up Next',
                     value: queue
                         .map(
                             (track, index) =>
-                                `**${index + 1}.** [${track.info.title}](${track.info.uri})`,
+                                `**${index + 1}.** [${track.info.title}](${track.info.uri}) - \`${ms(track.info.length)}\``,
                         )
                         .join('\n'),
                 },
             ]);
+        } else {
+            embed.setDescription('The queue is currently empty.');
+        }
 
         return interaction.reply({ embeds: [embed] });
     },
