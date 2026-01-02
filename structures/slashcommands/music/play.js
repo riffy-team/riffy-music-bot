@@ -10,18 +10,16 @@ module.exports = {
             description: 'The query to search for',
             type: ApplicationCommandOptionType.String,
             required: true,
+            autocomplete: true,
         }
     ],
 
     /**
-     * 
      * @param {Client} client 
      * @param {CommandInteraction} interaction 
-     * @param {String[]} args
-     * @returns 
      */
 
-    run: async (client, interaction, args) => {
+    run: async (client, interaction) => {
         const query = interaction.options.getString('query');
 
         const player = client.riffy.createConnection({
@@ -58,4 +56,29 @@ module.exports = {
             return interaction.reply(`There were no results found for your query.`);
         }
     },
+
+    autocomplete: async (client, interaction) => {
+        const query = interaction.options.getFocused();
+        if (!query || query.length < 3) return interaction.respond([]);
+        if (query.startsWith("http")) return interaction.respond([]);
+
+        try {
+            const resolve = await client.riffy.resolve({ query: query, requester: interaction.member });
+            const { loadType, tracks } = resolve;
+
+            if (loadType === 'search' || loadType === 'track') {
+                const results = tracks.slice(0, 10).map(track => ({
+                    name: track.info.title.length > 100 ? track.info.title.substring(0, 97) + "..." : track.info.title,
+                    value: track.info.uri
+                }));
+
+                return interaction.respond(results);
+            } else {
+                return interaction.respond([]);
+            }
+        } catch (err) {
+            // Silently catch autocomplete errors like "Unknown interaction"
+            // as they are common when users type quickly.
+        }
+    }
 };
