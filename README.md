@@ -24,6 +24,7 @@
 - All basic music commands
 - **Autocomplete Search Support** (Fast & easy music searching)
 - **Now Playing Card** (Powered by Musicard Bloom)
+- **Aggressive Autoplay System** (Ensures the music never stops with smart fallbacks)
 - **Loop, Volume, and Queue Management**
 - Integrated with [Musicard](https://github.com/unburn/musicard) for beautiful song cards.
 - Using [Discord Pro Handler](https://github.com/flameface/discord-pro-handler) logic.

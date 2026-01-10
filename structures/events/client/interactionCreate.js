@@ -81,6 +81,8 @@ client.on("interactionCreate", async (interaction) => {
             logger("An error occurred while processing a slash command:", "error");
             console.error(err);
 
+            if (err.code === 10062) return;
+
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp({ content: `An error occurred: ${err.message}`, flags: [MessageFlags.Ephemeral] });
             } else {

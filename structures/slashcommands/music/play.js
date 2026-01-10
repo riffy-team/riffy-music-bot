@@ -20,6 +20,7 @@ module.exports = {
      */
 
     run: async (client, interaction) => {
+        await interaction.deferReply();
         const query = interaction.options.getString('query');
 
         const player = client.riffy.createConnection({
@@ -38,7 +39,7 @@ module.exports = {
                 player.queue.add(track);
             }
 
-            await interaction.reply(`Added ${tracks.length} songs from ${playlistInfo.name} playlist.`);
+            await interaction.editReply(`Added ${tracks.length} songs from ${playlistInfo.name} playlist.`);
 
             if (!player.playing && !player.paused) return player.play();
 
@@ -48,12 +49,12 @@ module.exports = {
 
             player.queue.add(track);
 
-            await interaction.reply(`Added **${track.info.title}** to the queue.`);
+            await interaction.editReply(`Added **${track.info.title}** to the queue.`);
 
             if (!player.playing && !player.paused) return player.play();
 
         } else {
-            return interaction.reply(`There were no results found for your query.`);
+            return interaction.editReply(`There were no results found for your query.`);
         }
     },
 

@@ -92,7 +92,7 @@ client.on('interactionCreate', async (interaction) => {
                 new ButtonBuilder()
                     .setCustomId('skiped')
                     .setStyle(ButtonStyle.Success)
-                    .setLabel('Skiped')
+                    .setLabel('Skipped')
                     .setDisabled(true)
             );
 
