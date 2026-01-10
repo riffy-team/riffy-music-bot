@@ -17,7 +17,7 @@ module.exports = {
             .addFields([
                 {
                     name: '🎵 Music Commands',
-                    value: '`/play` - Play a song or playlist\n`/pause` - Pause the current music\n`/nowplaying` - Show current song info\n`/resume` - Resume paused music\n`/skip` - Skip the current song\n`/queue` - Show the current queue\n`/disconnect` - Stop and leave the voice channel\n`/volume` - Set the volume\n`/loop` - Set loop mode'
+                    value: '`/play` - Play a song or playlist\n`/autoplay` - Toggle autoplay mode\n`/pause` - Pause the current music\n`/nowplaying` - Show current song info\n`/resume` - Resume paused music\n`/skip` - Skip the current song\n`/queue` - Show the current queue\n`/disconnect` - Stop and leave the voice channel\n`/volume` - Set the volume\n`/loop` - Set loop mode'
                 },
                 {
                     name: 'ℹ️ Information',
