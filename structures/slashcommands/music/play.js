@@ -25,7 +25,7 @@ module.exports = {
 
         const player = client.riffy.createConnection({
             guildId: interaction.guild.id,
-            voiceChannel: interaction.member.voice.channel.id,
+            voiceChannel: interaction.member.voice.channelId,
             textChannel: interaction.channel.id,
             deaf: true,
         })
