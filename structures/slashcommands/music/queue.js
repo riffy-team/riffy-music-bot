@@ -16,7 +16,7 @@ module.exports = {
         const totalDuration = player.queue.reduce((acc, curr) => acc + curr.info.length, 0);
 
         const embed = new EmbedBuilder()
-            .setColor('#5865F2')
+            .setColor('#00E9B1')
             .setTitle('🎶 Current Queue')
             .setThumbnail(player.current.info.thumbnail)
             .addFields([

@@ -11,7 +11,7 @@ module.exports = {
 
     run: async (client, interaction) => {
         const embed = new EmbedBuilder()
-            .setColor('#5865F2')
+            .setColor('#00E9B1')
             .setTitle('📚 Bot Help')
             .setDescription('Here are the available slash commands for the Riffy Music Bot:')
             .addFields([
