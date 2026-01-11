@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     name: 'resume',
     description: 'Resumes the current track',
@@ -8,10 +10,16 @@ module.exports = {
         const player = client.riffy.players.get(interaction.guild.id);
 
         if (!player.paused) {
-            return interaction.reply(`The player is already playing song`);
+            const embed = new EmbedBuilder()
+                .setColor('#FF0000')
+                .setDescription(`The player is already playing song`);
+            return interaction.reply({ embeds: [embed] });
         } else {
             player.pause(false);
-            return interaction.reply(`Resumed the current track.`);
+            const embed = new EmbedBuilder()
+                .setColor('#00E9B1')
+                .setDescription(`Resumed the current track.`);
+            return interaction.reply({ embeds: [embed] });
         }
     },
 };

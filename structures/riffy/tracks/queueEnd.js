@@ -1,20 +1,19 @@
-const client = require("../../client");
-     client.riffy.on("queueEnd", async (player) => {
-         const channel = client.channels.cache.get(player.textChannel);
-     
-         // Deletes the current player message if it exists
-         if (player.message) {
-             await player.message.delete().catch(() => {});
-         }
+const { EmbedBuilder } = require("discord.js");
+const client = require("../../client")
+
+client.riffy.on("queueEnd", async (player) => {
+    const channel = client.channels.cache.get(player.textChannel);
     
-        if (player.isAutoplay) {
-            // Uses Riffy's built-in autoplay implementation
-            player.autoplay(player);
-        } else {
-            // Standard cleanup when queue ends
-            player.destroy();
-            if (channel) {
-                channel.send("Queue has ended.");
-            }
-        }
-    });
+    if (player.message) await player.message.delete().catch(() => {});
+
+    if (player.isAutoplay) {
+        player.autoplay(player);
+    } else {
+        if (player.twentyFourSeven) return;
+        player.destroy();
+        const embed = new EmbedBuilder()
+            .setColor("#00E9B1")
+            .setDescription("Queue has ended.");
+        channel.send({ embeds: [embed] });
+    }
+})

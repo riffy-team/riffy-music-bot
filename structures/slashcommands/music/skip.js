@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     name: 'skip',
     description: 'Skips the current track',
@@ -8,6 +10,10 @@ module.exports = {
         const player = client.riffy.players.get(interaction.guild.id);
         player.stop();
 
-        return interaction.reply(`Skipped the current track.`);
+        const embed = new EmbedBuilder()
+            .setColor('#00E9B1')
+            .setDescription(`Skipped the current track.`);
+
+        return interaction.reply({ embeds: [embed] });
     },
 };

@@ -1,4 +1,4 @@
-const { Client, CommandInteraction } = require("discord.js")
+const { Client, CommandInteraction, EmbedBuilder } = require("discord.js")
 
 module.exports = {
     name: "ping",
@@ -11,6 +11,9 @@ module.exports = {
      */
 
     run: async (client, interaction) => {
-        return interaction.reply(`${client.ws.ping}ms`)
+        const embed = new EmbedBuilder()
+            .setColor("#00E9B1")
+            .setDescription(`🏓 Pong! Bot latency is **${client.ws.ping}ms**`);
+        return interaction.reply({ embeds: [embed] });
     }
 }

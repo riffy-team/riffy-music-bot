@@ -1,6 +1,6 @@
 const { readdirSync } = require("fs");
 const { REST, Routes, Client, Collection } = require('discord.js');
-const { client_id, client_token, nodes } = require("./configuration/index");
+const { client_id, client_token, nodes, defaultSearchPlatform } = require("./configuration/index");
 const { logger } = require("./functions/logger");
 const { Riffy } = require("riffy");
 const { initializeFonts } = require("musicard");
@@ -26,7 +26,7 @@ client.riffy = new Riffy(client, nodes, {
         const guild = client.guilds.cache.get(payload.d.guild_id);
         if (guild) guild.shard.send(payload);
     },
-    defaultSearchPlatform: "ytmsearch",
+    defaultSearchPlatform: defaultSearchPlatform || "ytmsearch",
     restVersion: "v4"
 });
 

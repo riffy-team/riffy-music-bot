@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 const { Bloom } = require("musicard");
 const client = require("../../client")
 
@@ -45,8 +45,15 @@ client.riffy.on('trackStart', async (player, track) => {
         volumeBar: player.volume,
     });
 
+    const embed = new EmbedBuilder()
+        .setColor('#00E9B1')
+        .setTitle('Now Playing')
+        .setDescription(`**${track.info.title}** by **${track.info.author}**`)
+        .setImage('attachment://musicard.png');
+
     const msg = await channel
         .send({
+            embeds: [embed],
             files: [{ attachment: musicard, name: "musicard.png" }],
             components: [row]
         })

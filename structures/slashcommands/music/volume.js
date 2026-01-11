@@ -1,4 +1,4 @@
-const { Client, CommandInteraction, ApplicationCommandOptionType } = require('discord.js');
+const { Client, CommandInteraction, ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'volume',
@@ -28,6 +28,10 @@ module.exports = {
 
         player.setVolume(amount);
 
-        return interaction.reply(`Volume set to: **${amount}%**`);
+        const embed = new EmbedBuilder()
+            .setColor('#00E9B1')
+            .setDescription(`Volume set to: **${amount}%**`);
+
+        return interaction.reply({ embeds: [embed] });
     },
 };
