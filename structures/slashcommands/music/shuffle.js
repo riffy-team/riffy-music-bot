@@ -1,11 +1,11 @@
 const { Client, CommandInteraction, EmbedBuilder } = require('discord.js');
 
 module.exports = {
-    name: 'autoplay',
-    description: 'Toggle autoplay mode',
+    name: 'shuffle',
+    description: 'Shuffle the queue',
+    player: true,
     inVoice: true,
     sameVoice: true,
-    player: true,
 
     /**
      * @param {Client} client 
@@ -15,11 +15,18 @@ module.exports = {
     run: async (client, interaction) => {
         const player = client.riffy.players.get(interaction.guild.id);
 
-        player.isAutoplay = !player.isAutoplay;
+        if (player.queue.size <= 1) {
+            const embed = new EmbedBuilder()
+                .setColor('#FF0000')
+                .setDescription("Not enough songs in the queue to shuffle.");
+            return interaction.reply({ embeds: [embed], ephemeral: true });
+        }
+
+        player.queue.shuffle();
 
         const embed = new EmbedBuilder()
             .setColor('#00E9B1')
-            .setDescription(`Autoplay is now **${player.isAutoplay ? 'enabled' : 'disabled'}**.`);
+            .setDescription("Shuffled the queue!");
 
         return interaction.reply({ embeds: [embed] });
     },

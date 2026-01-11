@@ -1,4 +1,4 @@
-const { PermissionsBitField, MessageFlags } = require("discord.js");
+const { PermissionsBitField, MessageFlags, EmbedBuilder } = require("discord.js");
 const client = require("../../client");
 const { developers } = require("../../configuration/index");
 const { logger } = require("../../functions/logger");
@@ -9,8 +9,11 @@ client.on("interactionCreate", async (interaction) => {
         const command = client.slashCommands.get(interaction.commandName);
 
         if (!command) {
+            const embed = new EmbedBuilder()
+                .setColor("#FF0000")
+                .setDescription(`${interaction.commandName} is not a valid command`);
             return interaction.reply({
-                content: `${interaction.commandName} is not a valid command`,
+                embeds: [embed],
                 flags: [MessageFlags.Ephemeral],
             });
         }
@@ -21,57 +24,81 @@ client.on("interactionCreate", async (interaction) => {
             const clientChannel = interaction.guild.members.me.voice.channelId;
 
             if (command.developerOnly && !developers.includes(interaction.user.id)) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`${interaction.commandName} is a developer only command`);
                 return interaction.reply({
-                    content: `${interaction.commandName} is a developer only command`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
 
             if (command.userPermissions && !interaction.channel.permissionsFor(interaction.member).has(PermissionsBitField.resolve(command.userPermissions))) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`You do not have the required permissions to use this command. You need: ${command.userPermissions.join(", ")}`);
                 return interaction.reply({
-                    content: `You do not have the required permissions to use this command. You need: ${command.userPermissions.join(", ")}`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
 
             if (command.clientPermissions && !interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionsBitField.resolve(command.clientPermissions))) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`I do not have the required permissions. I need: ${command.clientPermissions.join(", ")}`);
                 return interaction.reply({
-                    content: `I do not have the required permissions. I need: ${command.clientPermissions.join(", ")}`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
 
             if (command.guildOnly && !interaction.guildId) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`${interaction.commandName} is a guild only command`);
                 return interaction.reply({
-                    content: `${interaction.commandName} is a guild only command`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
 
             if (command.inVoice && !memberChannel) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`You must be in a voice channel to use this command.`);
                 return interaction.reply({
-                    content: `You must be in a voice channel to use this command.`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
 
             if (command.sameVoice && clientChannel && memberChannel !== clientChannel) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`You must be in the same voice channel as me to use this command.`);
                 return interaction.reply({
-                    content: `You must be in the same voice channel as me to use this command.`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
 
             if (command.player && !player) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`No music is currently playing.`);
                 return interaction.reply({
-                    content: `No music is currently playing.`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
 
             if (command.current && !player.current) {
+                const embed = new EmbedBuilder()
+                    .setColor("#FF0000")
+                    .setDescription(`I am not playing anything right now.`);
                 return interaction.reply({
-                    content: `I am not playing anything right now.`,
+                    embeds: [embed],
                     flags: [MessageFlags.Ephemeral],
                 });
             }
@@ -83,10 +110,14 @@ client.on("interactionCreate", async (interaction) => {
 
             if (err.code === 10062) return;
 
+            const embed = new EmbedBuilder()
+                .setColor("#FF0000")
+                .setDescription(`An error occurred: ${err.message}`);
+
             if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ content: `An error occurred: ${err.message}`, flags: [MessageFlags.Ephemeral] });
+                await interaction.followUp({ embeds: [embed], flags: [MessageFlags.Ephemeral] });
             } else {
-                await interaction.reply({ content: `An error occurred: ${err.message}`, flags: [MessageFlags.Ephemeral] });
+                await interaction.reply({ embeds: [embed], flags: [MessageFlags.Ephemeral] });
             }
         }
     } else if (interaction.isAutocomplete()) {

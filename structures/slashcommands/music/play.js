@@ -1,4 +1,4 @@
-const { Client, CommandInteraction, ApplicationCommandOptionType } = require('discord.js');
+const { Client, CommandInteraction, ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'play',
@@ -39,7 +39,11 @@ module.exports = {
                 player.queue.add(track);
             }
 
-            await interaction.editReply(`Added ${tracks.length} songs from ${playlistInfo.name} playlist.`);
+            const embed = new EmbedBuilder()
+                .setColor('#00E9B1')
+                .setDescription(`Added **${tracks.length}** songs from **${playlistInfo.name}** playlist.`);
+
+            await interaction.editReply({ embeds: [embed] });
 
             if (!player.playing && !player.paused) return player.play();
 
@@ -49,12 +53,20 @@ module.exports = {
 
             player.queue.add(track);
 
-            await interaction.editReply(`Added **${track.info.title}** to the queue.`);
+            const embed = new EmbedBuilder()
+                .setColor('#00E9B1')
+                .setDescription(`Added **${track.info.title}** to the queue.`);
+
+            await interaction.editReply({ embeds: [embed] });
 
             if (!player.playing && !player.paused) return player.play();
 
         } else {
-            return interaction.editReply(`There were no results found for your query.`);
+            const embed = new EmbedBuilder()
+                .setColor('#FF0000')
+                .setDescription(`There were no results found for your query.`);
+
+            return interaction.editReply({ embeds: [embed] });
         }
     },
 

@@ -1,0 +1,71 @@
+
+> riffy-music-bot@1.2.0 start
+> node index.js
+
+
+---------------------
+[34m[2026-01-11 15:00:02]:[39m [34mINITIATING COMMANDS[39m
+[2026-01-11 15:00:02]: [COMMANDS] reloadcommand
+[2026-01-11 15:00:02]: [COMMANDS] reloadslash
+[2026-01-11 15:00:02]: [COMMANDS] stats
+[2026-01-11 15:00:02]: [COMMANDS] shard
+[2026-01-11 15:00:02]: [COMMANDS] ping
+---------------------
+
+---------------------
+[34m[2026-01-11 15:00:02]:[39m [34mINITIATING EVENTS[39m
+[2026-01-11 15:00:02]: [EVENTS] interactionCreate
+[2026-01-11 15:00:02]: [EVENTS] messageCreate
+[2026-01-11 15:00:02]: [EVENTS] raw
+[2026-01-11 15:00:02]: [EVENTS] ready
+[2026-01-11 15:00:02]: [EVENTS] buttons
+---------------------
+
+---------------------
+[34m[2026-01-11 15:00:02]:[39m [34mINITIATING SLASH COMMANDS[39m
+[2026-01-11 15:00:02]: [SLASH] help
+[2026-01-11 15:00:02]: [SLASH] ping
+[2026-01-11 15:00:02]: [SLASH] status
+[2026-01-11 15:00:02]: [SLASH] 247
+[2026-01-11 15:00:02]: [SLASH] autoplay
+[2026-01-11 15:00:02]: [SLASH] disconnect
+[2026-01-11 15:00:02]: [SLASH] filter
+[2026-01-11 15:00:02]: [SLASH] loop
+[2026-01-11 15:00:02]: [SLASH] lyrics
+[2026-01-11 15:00:02]: [SLASH] nowplaying
+[2026-01-11 15:00:02]: [SLASH] pause
+[2026-01-11 15:00:02]: [SLASH] play
+[2026-01-11 15:00:02]: [SLASH] queue
+[2026-01-11 15:00:02]: [SLASH] resume
+[2026-01-11 15:00:02]: [SLASH] seek
+[2026-01-11 15:00:02]: [SLASH] shuffle
+[2026-01-11 15:00:02]: [SLASH] skip
+[2026-01-11 15:00:02]: [SLASH] volume
+---------------------
+
+---------------------
+[32m[2026-01-11 15:00:04]:[39m [32mSuccessfully registered application commands.[39m
+---------------------
+
+---------------------
+[34m[2026-01-11 15:00:04]:[39m [34mINITIATING RIFFY[39m
+[2026-01-11 15:00:04]: [RIFFY] nodeConnect
+[2026-01-11 15:00:04]: [RIFFY] nodeError
+[2026-01-11 15:00:04]: [RIFFY] queueEnd
+[2026-01-11 15:00:04]: [RIFFY] trackEnd
+[2026-01-11 15:00:04]: [RIFFY] trackError
+[2026-01-11 15:00:04]: [RIFFY] trackStart
+
+---------------------
+[32m[2026-01-11 15:00:04]:[39m [32mSploov#0988 is ready[39m
+---------------------
+(node:13922) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+---------------------
+[2026-01-11 15:00:12]: Node lavalink.jirayu.net has connected.
+---------------------
+
+---------------------
+[2026-01-11 15:01:14]: Node lavalink.jirayu.net has connected.
+---------------------

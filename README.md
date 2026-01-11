@@ -26,6 +26,10 @@
 - **Now Playing Card** (Powered by Musicard Bloom)
 - **Aggressive Autoplay System** (Ensures the music never stops with smart fallbacks)
 - **Loop, Volume, and Queue Management**
+- **Audio Filters** (Bassboost, Nightcore, 8D, and more)
+- **Lyrics Support** (Get lyrics for currently playing songs)
+- **Seek & Shuffle** (Advanced playback controls)
+- **24/7 Mode** (Keep the bot in the voice channel even when empty)
 - Integrated with [Musicard](https://github.com/unburn/musicard) for beautiful song cards.
 - Using [Discord Pro Handler](https://github.com/flameface/discord-pro-handler) logic.
 - Robust error handling and sharding support.

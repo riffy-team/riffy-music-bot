@@ -1,8 +1,8 @@
 const { Client, CommandInteraction, EmbedBuilder } = require('discord.js');
 
 module.exports = {
-    name: 'autoplay',
-    description: 'Toggle autoplay mode',
+    name: '247',
+    description: 'Toggle 24/7 mode for the player',
     inVoice: true,
     sameVoice: true,
     player: true,
@@ -15,11 +15,11 @@ module.exports = {
     run: async (client, interaction) => {
         const player = client.riffy.players.get(interaction.guild.id);
 
-        player.isAutoplay = !player.isAutoplay;
+        player.twentyFourSeven = !player.twentyFourSeven;
 
         const embed = new EmbedBuilder()
             .setColor('#00E9B1')
-            .setDescription(`Autoplay is now **${player.isAutoplay ? 'enabled' : 'disabled'}**.`);
+            .setDescription(`24/7 mode is now **${player.twentyFourSeven ? 'enabled' : 'disabled'}**.`);
 
         return interaction.reply({ embeds: [embed] });
     },

@@ -1,4 +1,4 @@
-const { Client, CommandInteraction, ApplicationCommandOptionType } = require('discord.js');
+const { Client, CommandInteraction, ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'loop',
@@ -31,6 +31,10 @@ module.exports = {
 
         player.setLoop(mode);
 
-        return interaction.reply(`Loop mode set to: **${mode}**`);
+        const embed = new EmbedBuilder()
+            .setColor('#00E9B1')
+            .setDescription(`Loop mode set to: **${mode}**`);
+
+        return interaction.reply({ embeds: [embed] });
     },
 };
